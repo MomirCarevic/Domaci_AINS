@@ -1,0 +1,16 @@
+Zadatak 1: 
+	a) Pomeranje blank simbola na pocetak: 
+		- Umesto trougla ce biti p kao pocetak.
+
+		- Ova Tjuringova mašina je zamišljena sa 5 stanja (startno s stanje, halt stanje h, q0, q1 i q2). Početno s start stanje služi da nas odvede na kraj stringa, a kada dođemo do kraja zadatog stringa prelazimo u stanje q. U zavisnosti da li imamo 0 ili 1 prelazimo u stanje q0 ili q1 koji služe da cifru pomere za jedno mesto u desno, a na mestu na kom se naalazila cifra bude simbol za blank. I na kraju kada sa kraja stringa dovedemo simbol za blank na početak stringa, ukoliko smo trenutno u stanju q,q1 ili q0 očitan simbol za početak, kursor se pomera za mesto u desno na blank i onda se program zaustavlja.
+
+	b) Binary successor: 
+		- Umesto trougla ce biti p kao pocetak.
+		
+		- Binary successor se sastoji iz tri osnovna stanja start s stanje, q i halt h stanje. U start stanju očitavamo da li je p,1 ili 0 i naspram toga pomeramo kursor za jedno u mesto desno.Kada u s stanju očitamo simbol za blank prelazimo u stanje q, na to mesto upisujemo simbol za blank i pomeramo se za jedno mesto u levo. Sada u stanju q ako je na novoj poziciji nalazi jedinica, nju brišem i pišemo nulu i pomeramo se za jedno mesto u levo. Ako se na novoj poziciji npr. nađe 0, prelazimo u stanje h, upisujemo 1 i ostajemo na ovom mestu. Ova implementacija je okej, ali ima problem kada dođe do overflow-a, ako se na ulazu nađe p111, na izlazu nećemo dobiti 1111, te mora da se uradi korekcija za overflow.
+		- Da bi to uradili pozivamo prethodni deo zadatka kao gradivni blok kao četvrto stanje, u njega se prelazi kada u stanju q očitamo p (simbol za početak). Kada se očita p iz stanja q ulazimo u blok pomerača blank-a, pomerač odradi svoje i namesti kursor na blank na početku, kad mi očitamo taj blank, na njegovo mesto upisujemo keca, kursor ostaje na tom mestu i prelazimo u stanje h - halt.
+
+Zadatak 2: Implementiranje mašine koja briše string i staje na  početku
+	- Umesto trougla ce biti p kao pocetak.
+
+	- Sadrži se od tri stanja, s start stanje, q1 i h halt stanje. U s stanju prolazimo do kraja stringa i kada se očita blank simbol, pomeramo se za mesto u levo, na poslednji član stringa i prelazimo u stanje q1. U stanju q1 menjamo 0 ili 1 sa simbolom za blank i pomeramo se za mesto u levo. Kada u stanju q očitamo simbol za početak p, kursor se pomera za jedno mesto u desno na prvi blank simbol i program se zaustavlja (otišli smo u stanje h - halt).
